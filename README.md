@@ -4,7 +4,7 @@
 
 Assumes pyenv and poetry. 
 
-```zsh
+```bash
 pyenv install 3.10.0
 pyenv local 3.10.0
 poetry new kfp-hello-world
@@ -22,3 +22,21 @@ poetry env.
 
 Run code by right-clicking and running in IDE or use 
 `poetry run python <script>.py` from shell.
+
+### Kubeflow Pipelines
+
+Assumes KIND.
+
+```bash
+kind create cluster --name mykfp
+export PIPELINE_VERSION=2.0.1
+kubectl apply -k "github.com/kubeflow/pipelines/manifests/kustomize/cluster-scoped-resources?ref=$PIPELINE_VERSION"
+kubectl wait --for condition=established --timeout=60s crd/applications.app.k8s.io
+kubectl apply -k "github.com/kubeflow/pipelines/manifests/kustomize/env/dev?ref=$PIPELINE_VERSION"
+```
+
+Forward port for KFP UI:
+
+```bash
+kubectl port-forward -n kubeflow svc/ml-pipeline-ui 8080:80
+```
