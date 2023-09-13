@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "kfp-hello-world"
+version = "0.1.0"
+description = ""
+authors = ["Bruno Wassermann"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+kfp = "2.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
